@@ -27,8 +27,10 @@ Add tinyFlake as an input in your flake.nix:
   };
 
   outputs = { self, nixpkgs, tinyFlake, ... }@inputs:
-    tinyFlake.lib.makeFlake {
+    # mkFlake creates the tiny flake
+    tinyFlake.lib.mkFlake {
       inherit self inputs;
+      # Every output is optional. (assuming x86_64-linux if oomitted) 
       systems = [ "x86_64-linux" "aarch64-linux" ];
 
       # Map your hosts directory – each subdirectory becomes a NixOS config
@@ -43,7 +45,7 @@ Add tinyFlake as an input in your flake.nix:
       # Map devShell files
       devShells = tinyFlake.lib.mapModules ./devShells (path: import path);
 
-      # Map app files (optional)
+      # Map app files
       apps = tinyFlake.lib.mapModules ./apps (path: import path);
 
       # Extra modules to include in every NixOS configuration
@@ -51,8 +53,8 @@ Add tinyFlake as an input in your flake.nix:
 
       # Extra arguments to pass to nixosSystem
       specialArgs = { };
-    };
-}
+      
+    };}
 ```
 
 

@@ -1,9 +1,8 @@
 { 
   lib,
   dirMap
-} :
-
-{ self
+} : { 
+self
 , inputs
 , systems ? [ "x86_64-linux" ]   # default if not specified
 , hosts ? {}                      # optional – if empty, no nixosConfigurations
