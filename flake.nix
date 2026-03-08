@@ -9,6 +9,6 @@
       dirMap = import ./dirMap.nix { inherit lib; };
       mkFlake = import ./mkFlake.nix { inherit lib dirMap; };     
     in {
-      lib = dirMap // { inherit tinyFlake; };
+      lib = dirMap // { inherit mkFlake; };
 
     };}
